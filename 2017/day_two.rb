@@ -4,5 +4,5 @@ require 'advent_of_code/day_two'
 
 sheet = File.read('day_two_input.txt').split(/\n/)
 
-puts "Part one: #{AdventOfCode::DayTwo.checksum(sheet)}"
-#puts "Part two: #{AdventOfCode::DayOne.captcha2(code)}"
+puts "Part one: #{AdventOfCode::DayTwo.checksum(sheet, :minmax)}"
+puts "Part two: #{AdventOfCode::DayTwo.checksum(sheet, :evendividers)}"
