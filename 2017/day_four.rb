@@ -6,4 +6,5 @@ passwords = File.read('day_four_input.txt').split(/\n/)
 
 valid = passwords.select { |p| AdventOfCode::DayFour.validate(p) }
 
-puts "Part one: #{valid.count}"
+# puts "Part one: #{valid.count}"
+puts "Part two: #{valid.count}"
