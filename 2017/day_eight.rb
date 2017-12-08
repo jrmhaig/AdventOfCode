@@ -6,4 +6,5 @@ data = File.read('day_eight_input.txt').split(/\n/)
 
 registers = AdventOfCode::DayEight.new data
 
-puts "Part one: #{registers.find_largest}"
+puts "Part one: #{registers.largest}"
+puts "Part two: #{registers.maximum}"

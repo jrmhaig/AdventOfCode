@@ -1,12 +1,14 @@
 module AdventOfCode
   class DayEight
+    attr_reader :maximum
+
     def initialize data
-      @data = data
       @registers = {}
+      @maximum = 0
+      data.each { |line| process(line) }
     end
 
-    def find_largest
-      @data.each { |line| process(line) }
+    def largest
       @registers.values.max
     end
 
@@ -18,6 +20,7 @@ module AdventOfCode
       @registers[parts[4]] ||= 0
       if @registers[parts[4]].send(parts[5], parts[6].to_i)
         @registers[parts[0]] += ( parts[1] == 'inc' ? 1 : -1 ) * parts[2].to_i
+        @maximum = [@registers[parts[0]], @maximum].max
       end
     end
   end
