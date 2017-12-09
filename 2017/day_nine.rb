@@ -4,5 +4,6 @@ require 'advent_of_code/day_nine'
 
 data = File.read('day_nine_input.txt')
 
-puts "Part one: #{AdventOfCode::DayNine.score(data)}"
-
+stream = AdventOfCode::DayNine.new(data)
+puts "Part one: #{stream.score}"
+puts "Part two: #{stream.garbage_count}"
