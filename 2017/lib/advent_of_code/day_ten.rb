@@ -2,13 +2,15 @@ module AdventOfCode
   class DayTen
     attr_reader :code
 
-    def initialize size, inputs
+    def initialize size, inputs, rounds = 1
       @code = (0..size-1).to_a
       @pointer = 0
       @skip = 0
 
-      inputs.each do |n|
-        twist(n)
+      rounds.times do
+        inputs.each do |n|
+          twist(n)
+        end
       end
     end
 
@@ -28,6 +30,12 @@ module AdventOfCode
       end
       @pointer = (@pointer + n + @skip) % @code.length
       @skip += 1
+    end
+
+    def dense
+      ("%02x"*16) % 0.step(255,16).to_a.map do |i|
+        @code[i, 16].inject(0) { |x, j| x ^= j }
+      end
     end
 
     def checksum
