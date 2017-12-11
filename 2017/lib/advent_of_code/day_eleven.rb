@@ -11,13 +11,17 @@ module AdventOfCode
       'se' => Vector[0.5, -0.5]
     }
 
+    attr_reader :furthest
+
     def initialize
       @position = Vector[0, 0]
+      @furthest = 0
     end
 
     def walk *steps
-      @position = steps.inject(@position) do |position, step|
-        position + MOVE[step]
+      steps.each do |step|
+        @position += MOVE[step]
+        @furthest = [distance, @furthest].max
       end
     end
 

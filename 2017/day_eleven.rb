@@ -8,3 +8,4 @@ metric = AdventOfCode::DayEleven.new
 metric.walk *data
 
 puts "Part one: #{metric.distance}"
+puts "Part two: #{metric.furthest}"
