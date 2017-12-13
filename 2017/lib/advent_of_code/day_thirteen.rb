@@ -23,5 +23,12 @@ module AdventOfCode
       end
       severity
     end
+
+    def safe_path delay
+      @depths.keys.each do |i|
+        return false if (delay + i) % ((@depths[i]-1)*2) == 0
+      end
+      return true
+    end
   end
 end

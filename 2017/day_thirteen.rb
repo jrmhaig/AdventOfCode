@@ -9,3 +9,10 @@ end.to_h
 firewall = AdventOfCode::DayThirteen.new data
 
 puts "Part one: #{firewall.severity(0)}"
+
+i = 0
+while !firewall.safe_path(i)
+  i += 1
+end
+
+puts "Part two: #{i}"

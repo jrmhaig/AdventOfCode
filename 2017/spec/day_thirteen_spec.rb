@@ -44,4 +44,13 @@ RSpec.describe AdventOfCode::DayThirteen do
       expect(firewall.severity(0)).to eq 24
     end
   end
+
+  describe '#safe_path' do
+    it 'satisfies the example' do
+      0.upto(9) do |i|
+        expect(firewall.safe_path(i)).to be_falsey
+      end
+      expect(firewall.safe_path(10)).to be_truthy
+    end
+  end
 end
