@@ -2,13 +2,20 @@ module AdventOfCode
   class DayTen
     attr_reader :code
 
-    def initialize size, inputs, rounds = 1
+    def initialize size:, inputs:, type: :full, rounds: 1
       @code = (0..size-1).to_a
       @pointer = 0
       @skip = 0
 
+      data = case type
+             when :simple
+               inputs.split(/,/).map(&:to_i)
+             when :full
+               inputs.split(//).map(&:ord) + [17, 31, 73, 47, 23]
+             end
+
       rounds.times do
-        inputs.each do |n|
+        data.each do |n|
           twist(n)
         end
       end
