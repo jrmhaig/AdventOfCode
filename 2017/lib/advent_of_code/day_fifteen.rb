@@ -5,14 +5,22 @@ module AdventOfCode
       a: 16807,
       b: 48271
     }
+    MULTIPLIERS = {
+      a: 4,
+      b: 8
+    }
 
-    def initialize a, b
+    def initialize method, a, b
+      @method = method
       @a = a
       @b = b
     end
 
     def generate_next generator, input
-      input * FACTORS[generator] % DIVIDER
+      loop do
+        input = input * FACTORS[generator] % DIVIDER
+        return input if (@method == :simple or (input % MULTIPLIERS[generator] == 0))
+      end
     end
 
     def compare a, b
