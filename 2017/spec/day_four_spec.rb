@@ -4,15 +4,15 @@ RSpec.describe AdventOfCode::DayFour do
   describe '#validate' do
     context 'part one' do
       it 'satisfies the first example' do
-        expect(AdventOfCode::DayFour.validate 'aa bb cc dd ee').to be_truthy
+        expect(AdventOfCode::DayFour.validate 'aa bb cc dd ee', :simple).to be_truthy
       end
 
       it 'satisfies the second example' do
-        expect(AdventOfCode::DayFour.validate 'aa bb cc dd aa').to be_falsey
+        expect(AdventOfCode::DayFour.validate 'aa bb cc dd aa', :simple).to be_falsey
       end
 
       it 'satisfies the third example' do
-        expect(AdventOfCode::DayFour.validate 'aa bb cc dd aaa').to be_truthy
+        expect(AdventOfCode::DayFour.validate 'aa bb cc dd aaa', :simple).to be_truthy
       end
     end
 

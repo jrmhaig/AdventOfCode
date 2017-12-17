@@ -4,7 +4,8 @@ require 'advent_of_code/day_four'
 
 passwords = File.read('day_four_input.txt').split(/\n/)
 
-valid = passwords.select { |p| AdventOfCode::DayFour.validate(p) }
+valid = passwords.select { |p| AdventOfCode::DayFour.validate(p, :simple) }
+puts "Part one: #{valid.count}"
 
-# puts "Part one: #{valid.count}"
+valid = passwords.select { |p| AdventOfCode::DayFour.validate(p) }
 puts "Part two: #{valid.count}"
