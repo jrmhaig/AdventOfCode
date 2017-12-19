@@ -17,4 +17,11 @@ MAZE
       expect(maze.trace).to eq 'ABCDEF'
     end
   end
+
+  describe '#step_count' do
+    it 'satisfies the example' do
+      maze.trace
+      expect(maze.step_count).to eq 38
+    end
+  end
 end

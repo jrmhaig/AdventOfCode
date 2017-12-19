@@ -2,6 +2,8 @@ require 'matrix'
 
 module AdventOfCode
   class DayNineteen
+    attr_reader :step_count
+
     def initialize maze
       @maze = maze.split(/\n/).map { |line| line.chomp.split // }
     end
@@ -13,7 +15,9 @@ module AdventOfCode
       pointer = Vector[0, @maze[0].index('|')]
       direction = Vector[1, 0]
       message = ''
+      @step_count = 0
       while in_maze(pointer)
+        @step_count += 1
         message += @maze[pointer[0]][pointer[1]] if /[A-Z]/.match(@maze[pointer[0]][pointer[1]])
         if @maze[pointer[0]][pointer[1]] == '+'
           if direction[0] == 0
