@@ -3,11 +3,14 @@ require 'pp'
 
 module AdventOfCode
   class DayTwenty
-    attr_reader :particles
+    attr_reader :particles, :destroyed
+    attr_writer :destroy_collisions
 
     def initialize *data
       @all_particles = []
       @particles = []
+      @destroyed = []
+      @destroy_collisions = false
       data.each do |line|
         match = /p=<(.*)>, v=<(.*)>, a=<(.*)>/.match line
         @particles << {
@@ -19,14 +22,29 @@ module AdventOfCode
     end
 
     def step
-      @particles.each do |particle|
+      positions = {}
+      @particles.each_with_index do |particle, i|
+        next if @destroyed.include? i
         particle[:v] = particle[:v] + particle[:a]
         particle[:p] = particle[:p] + particle[:v]
+        if positions.keys.include? particle[:p]
+          positions[particle[:p]] << i
+        else
+          positions[particle[:p]] = [i]
+        end
+      end
+
+      if @destroy_collisions
+        positions.values.each do |ids|
+          if ids.length > 1
+            @destroyed += ids
+          end
+        end
       end
     end
 
     def all_steady?
-      @particles.each { |p| return false unless steady?(p) }
+      @particles.each_with_index { |p, i| return false unless (@destroyed.include?(i) || steady?(p)) }
       true
     end
 
@@ -50,7 +68,11 @@ module AdventOfCode
       end
 
       m_accells = @particles.map { |p| manhatten p, :a }
-      candidates = m_accells.each_index.select{|i| m_accells[i] == m_accells.min }
+      min = m_accells.max
+      m_accells.each_with_index do |acc, i|
+        min = [min, acc].min unless @destroyed.include? i
+      end
+      candidates = m_accells.each_index.select{|i| m_accells[i] == min }
       distances = candidates.map { |c| manhatten @particles[c] }
       candidates[distances.index(distances.min)]
     end
