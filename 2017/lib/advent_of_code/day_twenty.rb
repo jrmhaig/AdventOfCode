@@ -1,5 +1,4 @@
 require 'matrix'
-require 'pp'
 
 module AdventOfCode
   class DayTwenty
