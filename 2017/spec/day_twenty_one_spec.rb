@@ -137,7 +137,7 @@ RSpec.describe AdventOfCode::DayTwentyOne do
     end
 
     it 'transforms based on rotated pattern' do
-      expect(grid.transform(Matrix[[1, 0, 0], [1, 0, 1], [1, 1, 0]]))
+      expect(grid.transform(Matrix[[0, 1, 1], [1, 0, 1], [0, 0, 1]]))
         .to eq(Matrix[[1, 0, 0, 1], [0, 0, 0, 0], [0, 0, 0, 0], [1, 0, 0, 1]])
     end
 
@@ -145,6 +145,26 @@ RSpec.describe AdventOfCode::DayTwentyOne do
       expect(grid.transform(Matrix[[1, 1, 1], [0, 0, 1], [0, 1, 0]]))
         .to eq(Matrix[[1, 0, 0, 1], [0, 0, 0, 0], [0, 0, 0, 0], [1, 0, 0, 1]])
     end
+  end
 
+  describe '#step' do
+    it 'satisfies the example' do
+      grid.step
+      expect(grid.pattern).to eq Matrix[
+        [1, 0, 0, 1],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [1, 0, 0, 1]
+      ]
+      grid.step
+      expect(grid.pattern).to eq Matrix[
+        [1, 1, 0, 1, 1, 0],
+        [1, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [1, 1, 0, 1, 1, 0],
+        [1, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0]
+      ]
+    end
   end
 end
