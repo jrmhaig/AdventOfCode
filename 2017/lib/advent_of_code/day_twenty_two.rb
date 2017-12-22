@@ -1,7 +1,6 @@
 module AdventOfCode
   class DayTwentyTwo
-    attr_reader :position, :direction, :infection_count,
-                :weakened, :infected, :flagged
+    attr_reader :position, :direction, :infection_count
     attr_writer :evolved
 
     RIGHT = {
@@ -26,9 +25,6 @@ module AdventOfCode
     def initialize start
       @position = [0, 0]
       @direction = [0, 1]
-      @weakened = []
-      @infected = []
-      @flagged = []
       @bits = {}
       @infection_count = 0
       @evolved = false
@@ -38,7 +34,6 @@ module AdventOfCode
       rows.each_with_index do |row, i|
         j = -1
         while (j = row.index('#', j+1))
-          @infected << [j - offset, offset - i]
           set_bit(j - offset, offset - i, :infected)
         end
       end
