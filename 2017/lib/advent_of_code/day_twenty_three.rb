@@ -13,7 +13,7 @@ module AdventOfCode
 
     def run
       while @pointer >= 0 && @pointer < @rules.count
-        step
+        send(*@rules[@pointer])
       end
     end
 
@@ -39,12 +39,8 @@ module AdventOfCode
 
     private
 
-    def step
-      send(*@rules[@pointer])
-    end
-
     def value_of value
-      /-?\d+/.match(value) ? value.to_i : @register[value]
+      @register[value] ||= value.to_i
     end
   end
 end
