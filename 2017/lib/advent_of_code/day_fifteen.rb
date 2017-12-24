@@ -34,7 +34,7 @@ module AdventOfCode
         @b = generate_next :b, @b
         if compare @a, @b
           c += 1
-          print "\r#{i} : #{c}"
+          #print "\r#{i} : #{c}"
         end
       end
       c
