@@ -26,4 +26,14 @@ RSpec.describe AdventOfCode::DayOne do
       expect(AdventOfCode::DayOne.travel(')())())')).to eq -3
     end
   end
+
+  describe '.journey' do
+    it 'travels straight to the basement' do
+      expect(AdventOfCode::DayOne.journey(')')).to eq ([-1])
+    end
+
+    it 'returns the journey of the second example' do
+      expect(AdventOfCode::DayOne.journey('()())')).to eq ([1, 0, 1, 0, -1])
+    end
+  end
 end
