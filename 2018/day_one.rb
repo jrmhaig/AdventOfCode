@@ -10,14 +10,19 @@ end
 t1 = Time.now
 puts "Part one: #{steps[-1]}"
 
-collection = [0]
-while collection.count(collection[-1]) <= 1
-  i = changes.shift
-  collection << collection[-1] + i
-  changes << i
+final = steps[-1]
+all_steps = steps.dup
+
+found = nil
+i = 1
+while found.nil? do
+  next_steps = steps.map { |s| s + i * final }
+  found = (next_steps & all_steps).first
+  all_steps += next_steps
+  i += 1
 end
 t2 = Time.now
-puts "Part two: #{collection[-1]}"
+puts "Part two: #{found}"
 
 puts "Part one time: #{t1-t0} seconds"
 puts "Part two time: #{t2-t1} seconds"
