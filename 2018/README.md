@@ -9,4 +9,5 @@
 ## Day Two
 
 * Part one: 0.004 seconds
+* Part one (improved): 0.002 seconds
 * Part two: 0.004 seconds

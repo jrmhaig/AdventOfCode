@@ -1,5 +1,20 @@
 #!/usr/bin/env ruby
 
+LETTERS = ('a'..'z').freeze
+ids = File.read('day_two_input.txt').split(/\n/)
+
+t1 = Time.now
+
+def find_duplicates id, j
+  LETTERS.select { |l| id.count(l) == j }.empty? ? 0 : 1
+end
+
+checksum = ids.inject([0,0]) { |ns, id|
+             ns.map.with_index { |n, i| n + find_duplicates(id, i+2) }
+           }.inject(:*)
+
+puts "Part one: #{checksum}"
+
 letters = ('a'..'z')
 ids = File.read('day_two_input.txt').split(/\n/)
 
