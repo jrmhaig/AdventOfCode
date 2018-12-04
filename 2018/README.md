@@ -22,3 +22,10 @@
 
 * Part one: 1.2 seconds
 * Part two: 1.1 seconds
+
+## Day Four
+
+(Personal computer)
+
+* Part one: 0.003 seconds
+* Part two: 0.003 seconds
