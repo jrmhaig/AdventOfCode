@@ -29,3 +29,10 @@
 
 * Part one: 0.003 seconds
 * Part two: 0.003 seconds
+
+## Day Five
+
+(Work computer)
+
+* Part one: 0.3 seconds
+* Part two: 0.5 seconds
