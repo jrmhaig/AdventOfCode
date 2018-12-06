@@ -36,3 +36,10 @@
 
 * Part one: 0.3 seconds
 * Part two: 0.5 seconds
+
+## Day six
+
+(Work computer)
+
+* Part one: 1.3 seconds
+* Part two: 1.5 seconds
