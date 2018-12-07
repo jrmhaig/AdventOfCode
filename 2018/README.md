@@ -43,3 +43,10 @@
 
 * Part one: 1.3 seconds
 * Part two: 1.5 seconds
+
+## Day seven
+
+(Work computer)
+
+* Part one: 0.002 seconds
+* Part two: 0.03 seconds
