@@ -50,3 +50,11 @@
 
 * Part one: 0.002 seconds
 * Part two: 0.03 seconds
+
+## Day eight
+
+(Personal computer)
+
+* Part one: 0.006 seconds
+* Part two: 0.006 seconds
+
