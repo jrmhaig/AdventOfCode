@@ -20,9 +20,6 @@ class Link
   end
 end
 
-marbles = 1618
-players = 10
-
 def play marbles, players
   pointer = Link.new 0
   scores = Array.new(players, 0)
@@ -40,8 +37,7 @@ def play marbles, players
       pointer.backward.backward.forward = pointer
       pointer.backward = pointer.backward.backward
     else
-      new = Link.new i, pointer.forward.forward, pointer.forward
-      pointer = new
+      pointer = Link.new i, pointer.forward.forward, pointer.forward
     end
   end
 
@@ -49,7 +45,7 @@ def play marbles, players
 end
 
 t1 = Time.now
-puts "Part one: #{play(7999, 13)}"
+puts "Part one: #{play(71144, 424)}"
 t2 = Time.now
 puts "Part two: #{play(7114400, 424)}"
 t3 = Time.now
