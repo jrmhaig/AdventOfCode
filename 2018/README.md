@@ -58,3 +58,8 @@
 * Part one: 0.006 seconds
 * Part two: 0.006 seconds
 
+## Day nine
+
+(Personal computer)
+
+* Part one: 5.8 seconds
