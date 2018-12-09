@@ -1,34 +1,26 @@
 #!/usr/bin/env ruby
 
-players = 424
-
-def bump i, list
-  ( i + 1 ) % list.length
+def play players, marbles
+  circle = [0]
+  scores = Array.new(players, 0)
+  player = 0
+  1.upto(marbles).each do |marble|
+    if marble % 23 == 0
+      scores[player] += marble
+      scores[player] += circle.delete_at(-8)
+      circle = circle[-6..-1] + circle[0..-7]
+    else
+      circle << circle.shift
+      circle << marble
+    end
+    player = ( player + 1 ) % scores.length
+  end
+  scores.max
 end
 
 t1 = Time.now
 
-marbles = 71144
-
-circle = [0]
-scores = Array.new(players, 0)
-current = 0
-player = 0
-1.upto(marbles).each do |marble|
-  if marble % 23 == 0
-    scores[player] += marble
-    current -= 7
-    current %= circle.length
-    scores[player] += circle.delete_at(current)
-  else
-    current = bump current, circle
-    circle = circle[0..current] + [marble] + circle[current+1..-1]
-    current = bump current, circle
-  end
-  player = bump player, scores
-end
-
-puts "Day one: #{scores.max}"
+puts "Day one: #{play(424, 71144)}"
 
 t2 = Time.now
 
