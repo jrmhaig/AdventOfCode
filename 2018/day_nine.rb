@@ -5,7 +5,7 @@ def play players, marbles
 
   circle = [0]
 
-  1.upto(45).each do |marble|
+  1.upto(46).each do |marble|
     if marble % 23 == 0
       scores[marble % players] += marble + circle.delete_at(-8)
       circle = circle[-6..-1] + circle[0..-7]
@@ -16,11 +16,14 @@ def play players, marbles
   end
 
   marble = 46
-  2.upto(marbles/23).each do |i|
+  2.upto(marbles/23 - 1).each do |i|
+    circle += circle.shift(22).zip((i*23 + 1)..((i+1)*23 - 1)).flatten
+    marble += 23
+
     scores[marble % players] += marble + circle.delete_at(-8)
     circle = circle[-6..-1] + circle[0..-7]
-    circle = circle[22..-1] + circle[0,22].zip((i*23 + 1)..((i+1)*23 - 1)).flatten
-    marble += 23
+
+    circle = circle[0,marbles-marble]
   end
 
   scores.max
@@ -38,9 +41,9 @@ puts "Day one: #{play(424, 71144)}"
 
 t2 = Time.now
 
-#puts "Day two: #{play(424, 7114400)}"
+puts "Day two: #{play(424, 7114400)}"
 
-#t3 = Time.now
+t3 = Time.now
 
 puts "Part one time: #{t2-t1} seconds"
-#puts "Part two time: #{t3-t2} seconds"
+puts "Part two time: #{t3-t2} seconds"

@@ -63,4 +63,5 @@
 (Personal computer)
 
 * Part one: 5.8 seconds
-* Part one (faster): 0.36 seconds
+* Part one (faster): 0.26 seconds
+* Part two: 2592 seconds
