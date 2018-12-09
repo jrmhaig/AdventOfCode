@@ -65,3 +65,8 @@
 * Part one: 5.8 seconds
 * Part one (faster): 0.26 seconds
 * Part two: 2592 seconds
+
+### Version 2
+
+* Part one: 0.006 seconds
+* Part two: 3.2 seconds
