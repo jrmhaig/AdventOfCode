@@ -70,3 +70,9 @@
 
 * Part one: 0.006 seconds
 * Part two: 3.2 seconds
+
+## Day 10
+
+(Work computer)
+
+* Part one and two: 10.8 seconds
