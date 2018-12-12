@@ -76,3 +76,10 @@
 (Work computer)
 
 * Part one and two: 10.8 seconds
+
+## Day 11
+
+(Work computer)
+
+* Part one: 0.16 seconds
+* Part two: 98 seconds
