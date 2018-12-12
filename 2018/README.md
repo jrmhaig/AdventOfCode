@@ -83,3 +83,10 @@
 
 * Part one: 0.16 seconds
 * Part two: 98 seconds
+
+## Day 12
+
+(Work computer)
+
+* Part one: 0.002 seconds
+* Part two: 0.01 seconds

@@ -1,5 +1,25 @@
 #!/usr/bin/env ruby
 
+# Test data
+#initial = '#..#.#..##......###...###'
+#rules_text = <<~RULES
+#...## => #
+#..#.. => #
+#.#... => #
+#.#.#. => #
+#.#.## => #
+#.##.. => #
+#.#### => #
+##.#.# => #
+##.### => #
+###.#. => #
+###.## => #
+####.. => #
+####.# => #
+#####. => #
+#RULES
+
+# Day twelve input
 initial = '##..##....#.#.####........##.#.#####.##..#.#..#.#...##.#####.###.##...#....##....#..###.#...#.#.#.#'
 rules_text = <<~RULES
 ##.#. => .
@@ -42,29 +62,48 @@ pots = initial
   .with_index { |p, i| p == '#' ? i : nil }
   .reject(&:nil?)
 
-rules = rules_text.split(/\n/).inject({}) { |collection, rule|
-  (left, right) = rule.split(' => ')
-  collection.tap { |c| c[left.gsub('.', '0').gsub('#', '1').reverse.to_i(2)] = right }
-}
+rules = rules_text
+  .split(/\n/)
+  .map { |rule| rule.split(' => ') }
+  .select { |pair| pair[1] == '#' }
+  .map { |pair| pair[0] }
 
 def generate pots, rules, generations
-  generations.times do
-    marker = 0
+  left = 0
+  new_pots = []
+  last_pots = ''
+  last_left = 0
+  generations.times do |j|
+    print "\r#{j}" if j % 1000000 == 0
+    pots = '....' + pots + '....'
     new_pots = []
-    (pots.min - 2).upto(pots.max + 2) do |i|
-      marker /= 2
-      marker += 16 if pots.include?(i+2)
-      new_pots << i if rules[marker] == '#'
+    left -= 4
+    rules.each do |rule|
+      i = -1
+      until i.nil?
+        i = pots.index(rule, i+1)
+        new_pots << (i + left + 2) if i
+      end
     end
-    pots = new_pots
+    new_pots.sort!
+    left = new_pots[0]
+    pots = new_pots.min.upto(new_pots.max).map do |i|
+      new_pots.include?(i) ? '#' : '.'
+    end.join
+    if pots == last_pots
+      remaining = generations - j - 1
+      return new_pots.map { |p| p + remaining }.sum
+    end
+    last_pots = pots
+    last_left = left
   end
-  pots.sum
+  new_pots.sum
 end
 
 t1 = Time.now
-puts "Part one: #{generate(pots, rules, 20)}"
+puts "Part one: #{generate(initial, rules, 20)}"
 t2 = Time.now
-puts "Part two: #{generate(pots, rules, 50000000000)}"
+puts "Part two: #{generate(initial, rules, 50000000000)}"
 t3 = Time.now
 
 puts "Part one time: #{t2 - t1} seconds"
