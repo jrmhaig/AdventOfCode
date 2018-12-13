@@ -90,3 +90,10 @@
 
 * Part one: 0.002 seconds
 * Part two: 0.01 seconds
+
+## Day 13
+
+(Work computer)
+
+* Part one : 0.03 seconds
+* Part two : 0.4 seconds
