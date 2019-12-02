@@ -22,4 +22,18 @@ RSpec.describe DayOne do
       expect(DayOne.new(12, 14, 1969, 100756).fuel_required).to eq 2 + 2 + 654 + 33583
     end
   end
+
+  describe '#fuel_required_plus' do
+    it 'requires 2 fuel for mass 12' do
+      expect(DayOne.new(12).fuel_required_extra).to eq 2
+    end
+
+    it 'requires 966 fuel for mass 1969' do
+      expect(DayOne.new(1969).fuel_required_extra).to eq 966
+    end
+
+    it 'requires 50346 fuel for mass 100756' do
+      expect(DayOne.new(100756).fuel_required_extra).to eq 50346
+    end
+  end
 end
