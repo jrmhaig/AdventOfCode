@@ -9,6 +9,7 @@ class PseudoFibonacci
   def [] n
     @list.length.upto(n) { |i| @list[i] = @list[i-3..i-1].sum }
 
+pp @list
     @list[n]
   end
 end
