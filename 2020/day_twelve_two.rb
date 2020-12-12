@@ -1,10 +1,7 @@
 #!/bin/env ruby
 
 class State
-  DIRECTIONS = [:e, :s, :w, :n]
-
   def initialize
-    @direction = 0
     @x = @y = 0
     @waypoint_x = 10
     @waypoint_y = 1
