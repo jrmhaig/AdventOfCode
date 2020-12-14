@@ -2,7 +2,7 @@
 
 class Operation
   def initialize mask
-    @mask = mask.split(//).map { |bit| bit == 'X' ? nil : bit }.reverse
+    @mask = mask
     @commands = []
   end
 
@@ -11,30 +11,79 @@ class Operation
   end
 
   def process registry
+    registry.mask = @mask
     @commands.each do |command|
-      registry.record(command.merge(mask: @mask))
+      registry.record command
     end
   end
 end
 
 class Registry
-  def initialize
+  attr_reader :reg
+
+  def initialize recorder
     @reg = {}
+    @recorder = recorder
   end
 
-  def record address:, value:, mask:
-    @reg[address] = masked(value, mask)
+  def mask= m
+    @recorder.set_mask m
+  end
+
+  def record address:, value:
+    @recorder.call(self, address: address, value: value)
   end
 
   def sum
     @reg.values.sum
   end
+end
+
+class PartOneRecord
+  def call registry, address:, value:
+    registry.reg[address] = masked(value)
+  end
+
+  def set_mask mask
+    @mask = mask.split(//).map { |bit| bit == 'X' ? nil : bit }.reverse
+  end
 
   private
-  def masked n, mask
-    mask.zip(n.to_s(2).split(//).reverse).map do |pair|
-      pair[0] || pair[1] || '0'
+  def masked n
+    @mask.zip(n.to_s(2).split(//).reverse).map do |pair|
+      pair[0] ||  pair[1] || '0'
     end.reverse.join.to_i(2)
+  end
+end
+
+class PartTwoRecord
+  def call registry, address:, value:
+    masked_addresses(address).each do |add|
+      registry.reg[add] = value
+    end
+  end
+
+  def set_mask mask
+    @mask = mask.split(//).reverse
+  end
+
+  private
+  def masked_addresses n
+    masked_address = [0]
+    @mask.zip(n.to_s(2).split(//).reverse).each_with_index do |pair, i|
+      masked_address.map! do |add|
+        case pair[0]
+        when '0'
+          add + pair[1].to_i*2**i
+        when '1'
+          add + 2**i
+        when 'X'
+          [add, add + 2**i]
+        end
+      end.flatten!
+    end
+
+    masked_address
   end
 end
 
@@ -47,5 +96,9 @@ ops = File.readlines('day_fourteen_input.txt').map(&:chomp)
     end
   end
 
-registry = ops.each_with_object(Registry.new) { |op, reg| op.process reg }
+registry = Registry.new(PartOneRecord.new)
+registry = ops.each_with_object(registry) { |op, reg| op.process reg }
 puts "1) #{registry.sum}"
+registry = Registry.new(PartTwoRecord.new)
+registry = ops.each_with_object(registry) { |op, reg| op.process reg }
+puts "2) #{registry.sum}"
