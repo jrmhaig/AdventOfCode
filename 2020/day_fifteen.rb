@@ -2,27 +2,22 @@
 
 class Game
   def initialize *seed
-    @numbers = *seed
+    @numbers = Array(seed).each_with_index.to_h
+    @next = 0
   end
 
-  def [] n
-    @numbers[n-1] if @numbers.length >= n
-
-    @numbers.length.upto(n-1) do
-      @numbers << next_number
+  def find n
+    @numbers.values.max.upto(n-3) do |i|
+      new_next = @numbers[@next].nil? ? 0 : i + 1 - @numbers[@next]
+      @numbers[@next] = i + 1
+      @next = new_next
     end
-    @numbers.last
-  end
 
-  def next_number
-    @numbers.each_with_index
-      .map { |x, i| x == @numbers[-1] ? i : nil }
-      .compact[-2..]
-      &.reverse
-      &.inject(&:-).to_i
+    @next
   end
 end
 
-game = Game.new *File.read('day_fifteen_input.txt').chomp.split(/,/).map(&:to_i)
+seed = File.read('day_fifteen_input.txt').chomp.split(/,/).map(&:to_i)
 
-puts "1) #{game[2020]}"
+puts "1) #{Game.new(*seed).find(2020)}"
+puts "2) #{Game.new(*seed).find(30000000)}"
