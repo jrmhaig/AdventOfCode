@@ -11,6 +11,8 @@ class SubState
 
   def power_consumption = gamma * epsilon
 
+  def at(i) = yield(@report[i]) ? '1' : '0'
+
   private
 
   def gamma = @report.map { |n| n.positive? ? '1' : '0' }.join.to_i(2)
