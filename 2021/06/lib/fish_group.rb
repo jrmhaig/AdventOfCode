@@ -1,14 +1,11 @@
 class FishGroup
-  attr_accessor :adults, :juveniles
+  attr_accessor :juveniles
+  attr_writer :adults, :child_group
 
   def initialize(day)
     @day = day
     @adults = 0
     @juveniles = 0
-  end
-
-  def attach(child_group)
-    @child_group = child_group
   end
 
   def grow
