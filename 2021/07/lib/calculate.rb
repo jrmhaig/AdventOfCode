@@ -1,14 +1,11 @@
 class Calculate
   def initialize(data:, calculation:)
-    @data = data.sort
+    @range = (data.min..data.max)
+    @data = data.tally
     @calculation = calculation
   end
 
-  def fuel_range = @data.min.upto(@data.max).map { |i| fuel(i) }
+  def fuel_range = @range.map { |i| fuel(i) }
 
-  def fuel(i)
-    @data.tally.each_pair.map do |j, count|
-      count * @calculation.call(i, j)
-    end.sum
-  end
+  def fuel(i) = @data.each_pair.sum { |j, count| count * @calculation.call(i, j) }
 end
