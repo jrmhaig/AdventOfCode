@@ -3,6 +3,7 @@
 $LOAD_PATH << File.expand_path('lib', __dir__)
 
 require 'tube'
+require 'basin'
 
 tubes = []
 last_row = nil
@@ -26,3 +27,7 @@ File.open('input.txt').readlines.map(&:chomp).each do |line|
 end
 
 puts "1) #{tubes.select(&:minimum?).sum(&:risk)}"
+
+basins = tubes.select(&:minimum?).map { |tube| Basin.new(tube) }
+
+puts "2) #{basins.map(&:size).max(3).inject(&:*)}"

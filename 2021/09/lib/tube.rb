@@ -16,4 +16,8 @@ class Tube
   end
 
   def risk = @height + 1
+
+  def neighbours
+    [@north, @south, @east, @west].select { |t| t && t.height < 9 }
+  end
 end
