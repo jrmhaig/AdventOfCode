@@ -6,18 +6,14 @@ require 'tube'
 require 'basin'
 
 tubes = []
-last_row = nil
+last_row = []
 File.open('input.txt').readlines.map(&:chomp).each do |line|
   last_tube = nil
   row = line.split(//).each_with_index.map do |t, i|
     Tube.new(t).tap do |tube|
-      if last_tube
-        tube.west = last_tube
-        last_tube.east = tube
-      end
-      if last_row
-        tube.north = last_row[i]
-        last_row[i].south = tube
+      [last_tube, last_row[i]].compact.each do |other|
+        tube.neighbours << other
+        other.neighbours << tube
       end
       last_tube = tube
     end

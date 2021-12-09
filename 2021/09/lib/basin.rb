@@ -10,7 +10,7 @@ class Basin
     neighbours = [tube]
     while neighbours.any?
       @tubes += neighbours
-      neighbours = @tubes.map(&:neighbours).flatten.uniq - @tubes
+      neighbours = @tubes.map(&:neighbours_in_basin).flatten.uniq - @tubes
     end
   end
 end
