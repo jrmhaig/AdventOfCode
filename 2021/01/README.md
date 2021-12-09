@@ -17,6 +17,12 @@ and four.
 
 ## Solution
 
+Save the puzzle input as `input.txt` and execute
+
+```bash
+./measure.rb
+```
+
 Two classes are used in each part of the solution;
 
 * [`Compare`](lib/compare.rb) tallies the number of increments in the sequence.

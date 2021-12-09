@@ -9,8 +9,10 @@ expert but a colleague at work suggested that I could write notes for anyone
 else who might find this useful. To this end I have started adding README files
 with each solution.
 
+All these examples require Ruby >= 3.0.
+
 * [Day 1: Sonar Sweep](01/)
-* Day 2: Dive!
+* [Day 2: Dive!](02/)
 * Day 3: Binary Diagnostic
 * Day 4: Giant Squid
 * Day 5: Hydrothermal Venture
