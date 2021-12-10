@@ -7,7 +7,9 @@ design patterns. Generally these are the patterns documented in
 and the main purpose is to try to understand them better myself. I am not an
 expert but a colleague at work suggested that I could write notes for anyone
 else who might find this useful. To this end I have started adding README files
-with each solution.
+with each solution. These notes are mainly about the patterns used rather than
+solutions to the puzzles, which have already been amply covered in various
+places across the internet.
 
 All these examples require Ruby >= 3.0.
 
@@ -20,3 +22,4 @@ All these examples require Ruby >= 3.0.
 * Day 7: The Treachery of Whales
 * Day 8: Seven Segment Search
 * Day 9: Smoke Basin
+* [Day 10: Syntax Scoring](10/)
