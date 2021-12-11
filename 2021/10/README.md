@@ -2,7 +2,7 @@
 
 ## Overview
 
-The inputs for [Syntax Scoring](https://adventofcode.com/2021/day/1) are a list
+The inputs for [Syntax Scoring](https://adventofcode.com/2021/day/10) are a list
 of patterns of nested brackets of different types. The nesting is broken in two
 ways; unmatched terminating brackets and unterminated brackets. The challenge is
 to identify the errors.

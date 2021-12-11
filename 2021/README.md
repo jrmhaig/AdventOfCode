@@ -23,3 +23,4 @@ All these examples require Ruby >= 3.0.
 * Day 8: Seven Segment Search
 * Day 9: Smoke Basin
 * [Day 10: Syntax Scoring](10/)
+* [Day 11: Dumbo Octopus](11/)
