@@ -24,3 +24,4 @@ All these examples require Ruby >= 3.0.
 * Day 9: Smoke Basin
 * [Day 10: Syntax Scoring](10/)
 * [Day 11: Dumbo Octopus](11/)
+* [Day 12: Passage Pathing](12/)
