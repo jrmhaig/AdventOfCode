@@ -1,6 +1,6 @@
 module Packets
   class Literal
-    attr_reader :version
+    attr_reader :version, :value
 
     def initialize(version, bits)
       @version = version
@@ -10,7 +10,6 @@ module Packets
       end
 
       @value = literal_bits.each_slice(5).map { |sl| sl[1..-1] }.flatten.join.to_i(2)
-      # puts @value
     end
   end
 end

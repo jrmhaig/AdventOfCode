@@ -10,3 +10,4 @@ data = File.open('input.txt').read.chomp.split(//)
 bs = BitStream.new(*data)
 
 puts "1) #{bs.version}"
+puts "2) #{bs.value}"

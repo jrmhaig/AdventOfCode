@@ -15,7 +15,7 @@ class BitStream
     end
   end
 
-  def version
-    @packets.sum(&:version)
-  end
+  def version = @packets.sum(&:version)
+
+  def value = @packets.sum(&:value)
 end
