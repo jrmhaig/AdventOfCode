@@ -1,29 +1,34 @@
 require 'line'
+require 'number_extractor/just_numbers'
 
 RSpec.describe Line do
-  subject(:line) { described_class.new(text) }
+  subject(:line) { described_class.new(text, extractor: NumberExtractor::JustNumbers) }
 
   let(:text) { 'abc123' }
+
+  before do
+    allow(NumberExtractor::JustNumbers).to receive(:split).with(text).and_return(numbers)
+  end
 
   describe '#calibration_value' do
     subject { line.calibration_value }
 
-    context 'with a digit at the beginning and end' do
-      let(:text) { '2a5b9c3' }
+    context 'with exactly two digits' do
+      let(:numbers) { [5, 4] }
 
-      it { is_expected.to eq 23 }
+      it { is_expected.to eq 54 }
     end
 
-    context 'with digits embedded in the line' do
-      let(:text) { 'x2a5b5c3yz' }
+    context 'with more than two digits' do
+      let(:numbers) { [5, 8, 3, 2, 4] }
 
-      it { is_expected.to eq 23 }
+      it { is_expected.to eq 54 }
     end
 
     context 'with a single digit' do
-      let(:text) { 'abc7def' }
+      let(:numbers) { [9] }
 
-      it { is_expected.to eq 77 }
+      it { is_expected.to eq 99 }
     end
   end
 end
