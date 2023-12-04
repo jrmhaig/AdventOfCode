@@ -1,19 +1,28 @@
 require 'scan'
 
 RSpec.describe Scan do
-  describe '#find' do
-    subject { Scan.find(line) }
+  subject(:scanner) { described_class.new(*data) }
 
-    context 'with numbers not on the edge' do
-      let(:line) { '.467..11...633.' }
+  let(:data) do
+    [
+      '467..114..',
+      '...*......',
+      '..35..633.',
+      '......#...',
+      '617*......',
+      '.....+.58.',
+      '..592.....',
+      '......755.',
+      '...$.*....',
+      '.664.598..'
+    ]
+  end
 
-      it { is_expected.to eq([[0, 4], [5, 8], [10, 14]]) }
-    end
+  describe '#call' do
+    subject(:result) { scanner.call }
 
-    context 'with numbers on the edge' do
-      let(:line) { '467...11....633' }
+    it { expect(result[:parts].length).to eq 8 }
 
-      it { is_expected.to eq([[0, 3], [5, 8], [11, 14]]) }
-    end
+    it { expect(result[:parts].map(&:number)).to contain_exactly(467, 35, 633, 617, 592, 664, 755, 598) }
   end
 end
