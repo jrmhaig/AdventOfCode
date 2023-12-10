@@ -1,5 +1,6 @@
 class Node
-  attr_reader :x, :y, :mark
+  attr_accessor :mark
+  attr_reader :x, :y
 
   def initialize(x, y, mark, nodes:)
     @x = x
@@ -33,5 +34,9 @@ class Node
                     else
                       []
                     end
+  end
+
+  def edge
+    (@x == @nodes.x_min || @y == @nodes.y_min || @x == @nodes.x_max || @y == @nodes.y_max)
   end
 end
