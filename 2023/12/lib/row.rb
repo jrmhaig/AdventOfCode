@@ -1,25 +1,32 @@
 class Row
   attr_reader :springs, :groups
 
-  def initialize(springs, *groups)
+  def initialize(springs, *groups, memory:)
     @springs = springs
     @groups = groups
+    @memory = memory
   end
 
   def arrangements
-    return 0 if @springs.nil?
-    return single_group_arrangement if @groups.length == 1
+    @arrangements ||= begin
+      return 0 if @springs.nil?
+      return single_group_arrangement if @groups.length == 1
 
-    0.upto(@springs.length - @groups.first).take_while { |i| i == 0 || @springs[i-1] != '#' }.sum do |i|
-      if @springs[i, @groups.first].index('.') || (i > 0 && @springs[i-1] == '#') || (i + @groups.first < @springs.length && @springs[i + @groups.first] == '#')
-        0
-      else
-        Row.new(@springs[i+@groups.first+1..], *@groups[1..]).arrangements
+      0.upto(@springs.length - @groups.first).take_while { |i| i == 0 || @springs[i-1] != '#' }.sum do |i|
+        if @springs[i, @groups.first].index('.') || (i > 0 && @springs[i-1] == '#') || (i + @groups.first < @springs.length && @springs[i + @groups.first] == '#')
+          0
+        else
+          subrow(i + @groups.first + 1).arrangements
+        end
       end
     end
   end
 
   private
+
+  def subrow(start)
+    @memory[[@springs[start..], @groups[1..]]] ||= Row.new(@springs[start..], *@groups[1..], memory: @memory)
+  end
 
   def single_group_arrangement
     blocks = @springs.split(/\.+/).select { |block| block.match(/#/) }
