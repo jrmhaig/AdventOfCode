@@ -8,3 +8,7 @@ end
 
 total = clusters.sum(&:h_mirror) * 100 + clusters.sum(&:v_mirror)
 puts "Part 1: #{total}"
+
+clusters.each { |cluster| cluster.smudges = 1 }
+total = clusters.sum(&:h_mirror) * 100 + clusters.sum(&:v_mirror)
+puts "Part 2: #{total}"
