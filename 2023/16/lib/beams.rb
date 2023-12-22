@@ -7,11 +7,15 @@ class Beams
     @contraption = contraption
   end
 
+  def step
+    @heads = @heads.map { |head| @contraption.travel(head) }.flatten.reject { |head| @illuminated.include?(head) }
+    @illuminated += @heads
+    @illuminated.uniq!
+  end
+
   def illuminate
     until @heads.empty?
-      @heads = @heads.map { |head| @contraption.travel(head) }.flatten.reject { |head| @illuminated.include?(head) }
-      @illuminated += @heads
-      @illuminated.uniq!
+      step
     end
     @illuminated.map(&:position).uniq.count
   end

@@ -1,7 +1,7 @@
 require 'matrix'
 
 class BeamHead
-  attr_reader :position, :direction
+  attr_accessor :position, :direction
 
   MIRRORS = {
     '/' => Matrix[[0, -1], [-1, 0]],
@@ -19,5 +19,6 @@ class BeamHead
 
   def reflect(mirror)
     @direction = MIRRORS[mirror] * @direction
+    self
   end
 end

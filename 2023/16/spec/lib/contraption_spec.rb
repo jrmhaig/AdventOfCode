@@ -88,4 +88,130 @@ RSpec.describe Contraption do
       it { is_expected.to contain_exactly(BeamHead.new([2, 1], [1, 0]), BeamHead.new([2, 1], [-1, 0])) }
     end
   end
+
+  describe 'illuminate' do
+    subject { contraption.illuminate(entry:, direction:) }
+
+    context 'with a straight through path' do
+      let(:data) { ['.....'] }
+      let(:entry) { Vector[0, 0] }
+      let(:direction) { Vector[1, 0] }
+
+      it { is_expected.to eq(5) }
+    end
+
+    context 'with mirrors' do
+      let(:data) do
+        [
+          '.\\...',
+          '.../.',
+          '.\\./.'
+        ]
+      end
+      let(:entry) { Vector[0, 0] }
+      let(:direction) { Vector[1, 0] }
+
+      it { is_expected.to eq(8) }
+    end
+
+    context 'with - splitter while going right' do
+      let(:data) do
+        [
+          '.-...'
+        ]
+      end
+      let(:entry) { Vector[0, 0] }
+      let(:direction) { Vector[1, 0] }
+
+      it { is_expected.to eq(5) }
+    end
+
+    context 'with - splitter while going down' do
+      let(:data) do
+        [
+          '.....',
+          '.-...'
+        ]
+      end
+      let(:entry) { Vector[1, 0] }
+      let(:direction) { Vector[0, 1] }
+
+      it { is_expected.to eq(6) }
+    end
+
+    context 'with | splitter while going right' do
+      let(:data) do
+        [
+          '.....',
+          '.|...',
+          '.....',
+          '.....',
+          '.....',
+          '.....'
+        ]
+      end
+      let(:entry) { Vector[0, 1] }
+      let(:direction) { Vector[1, 0] }
+
+      it { is_expected.to eq(7) }
+    end
+
+    context 'with | splitter while going down' do
+      let(:data) do
+        [
+          '.....',
+          '.|...',
+          '.....'
+        ]
+      end
+      let(:entry) { Vector[1, 0] }
+      let(:direction) { Vector[0, 1] }
+
+      it { is_expected.to eq(3) }
+    end
+
+    context 'with a mirror at the entry point' do
+      let(:data) do
+        [
+          '.....',
+          '/....',
+          '.....'
+        ]
+      end
+      let(:entry) { Vector[0, 1] }
+      let(:direction) { Vector[1, 0] }
+
+      it { is_expected.to eq(2) }
+    end
+
+    context 'with a splitter at the entry point' do
+      let(:data) do
+        [
+          '.....',
+          '|....',
+          '.....'
+        ]
+      end
+      let(:entry) { Vector[0, 1] }
+      let(:direction) { Vector[1, 0] }
+
+      it { is_expected.to eq(3) }
+    end
+
+    context 'with a loop' do
+      let(:data) do
+        [
+          '.....',
+          './.\.',
+          '...|.',
+          '.\.|.',
+          '.....'
+        ]
+      end
+      let(:entry) { Vector[0, 2] }
+      let(:direction) { Vector[1, 0] }
+
+      it { is_expected.to eq(11) }
+    end
+  end
 end
